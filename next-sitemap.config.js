@@ -1,35 +1,38 @@
 const axios = require("axios");
 
-module.exports = {  
-  siteUrl: 'https://anyhr.vercel.app',
-  generateRobotsTxt: true,  
-  changefreq: 'weekly',
-  priority: 0.7,  
+module.exports = {
+  siteUrl: "https://anyhr.vercel.app",
+  generateRobotsTxt: true,
+  changefreq: "weekly",
+  priority: 0.7,
   sitemapSize: 5000,
-  exclude: ['/admin/**', '/user/**'],  
+  exclude: ["/admin/**", "/user/**"],
   transform: async (config, path) => {
-    if (path === '/catalog') {      
+    if (path === "/catalog") {
       return {
-        loc: path,        
-        changefreq: 'weekly',
-        priority: 1.0,        
+        loc: path,
+        changefreq: "weekly",
+        priority: 1.0,
         lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
-      }    
+      };
     }
-    return {      
+    return {
       loc: path,
-      changefreq: 'weekly',      
+      changefreq: "weekly",
       priority: 0.7,
-      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,    
-    }
-  },  
+      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+    };
+  },
   additionalPaths: async (config) => {
-    const products = await axios.get(`https://anyhr.vercel.app/api/products`);  
-    return products.map(product => ({
-      loc: `/product/${product.id}`,      
-      changefreq: 'weekly',
-      priority: 0.8,      
+    const response = await axios.get(`https://anyhr.vercel.app/api/products`);
+
+    const products = response.data.products;
+    console.log(products);
+    return products.map((product) => ({
+      loc: `/products/${product.id}`,
+      changefreq: "weekly",
+      priority: 0.8,
       lastmod: new Date().toISOString(),
     }));
-  }
-}
+  },
+};
