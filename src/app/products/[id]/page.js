@@ -8,6 +8,18 @@ export async function generateStaticParams() {
     slug: product.id,
   }));
 }
+
+export async function generateMetadata({ params }) {
+  const { id } = params;
+  const res = await axios.get(`https://anyhr.vercel.app/api/products/${id}`);
+  const product = res.data;
+
+  return {
+    title: product.name,
+    description: product.description,
+  };
+}
+
 const Product = async ({ params }) => {
   const { id } = params;
   const res = await axios.get(`https://anyhr.vercel.app/api/products/${id}`);
