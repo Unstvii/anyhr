@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function GET() {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://anyhr.vercel.app";
   const resProducts = await axios.get(`${baseUrl}/api/products`);
   const products = resProducts.data;
 

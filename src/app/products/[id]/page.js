@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 }
 const Product = async ({ params }) => {
   const { id } = params;
-  const res = await axios.get(`http://localhost:3000/api/products/${id}`);
+  const res = await axios.get(`https://anyhr.vercel.app/api/products/${id}`);
   const product = res.data;
 
   return (
