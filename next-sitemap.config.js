@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 module.exports = {  
-  siteUrl: 'http://localhost:3000',
+  siteUrl: 'https://anyhr.vercel.app',
   generateRobotsTxt: true,  
   changefreq: 'weekly',
   priority: 0.7,  
@@ -24,7 +24,7 @@ module.exports = {
     }
   },  
   additionalPaths: async (config) => {
-    const products = await axios.get(`http://localhost:3000/api/products`);  
+    const products = await axios.get(`https://anyhr.vercel.app/api/products`);  
     return products.map(product => ({
       loc: `/product/${product.id}`,      
       changefreq: 'weekly',
