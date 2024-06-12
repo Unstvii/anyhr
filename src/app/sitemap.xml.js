@@ -4,9 +4,6 @@ export async function GET() {
   const baseUrl = "https://anyhr.vercel.app";
   const resProducts = await axios.get(`${baseUrl}/api/products`);
   const products = resProducts.data;
-
-  //   const staticPages = ["", "about", "contact"];
-
   const dynamicPages = products.map((product) => `products/${product.id}`);
   console.log(dynamicPages);
   const allPages = [...dynamicPages];
